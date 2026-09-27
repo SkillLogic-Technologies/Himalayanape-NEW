@@ -26,7 +26,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Arman Kabir",
     role: "Solo Explorer · Thailand",
     quote:
-      "Movade turned a vague idea of “somewhere warm” into the best two weeks of my year.",
+      "Himalayanape turned a vague idea of “somewhere warm” into the best two weeks of my year.",
     photo: "/review/20303b5f6f2cf43506bb6d88e4ad0d93.jpg",
     x: -330,
     y: -110,
@@ -50,7 +50,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Imran Chowdhury",
     role: "Family Trip · Cox's Bazar",
     quote:
-      "Traveling with kids is stressful — Movade's team handled everything so we didn't have to.",
+      "Traveling with kids is stressful — Himalayanape's team handled everything so we didn't have to.",
     photo: "/review/39202174545c29bfbdb0bb981ed6e766.jpg",
     x: 150,
     y: -155,
@@ -98,7 +98,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Fahim Islam",
     role: "Return Client · Amalfi Coast",
     quote:
-      "Third trip booked with Movade and it keeps getting better. Never going elsewhere.",
+      "Third trip booked with Himalayanape and it keeps getting better. Never going elsewhere.",
     photo: "/review/b6ec85be9c5a41cd707f80aa5995c7b6.jpg",
     x: 170,
     y: 190,

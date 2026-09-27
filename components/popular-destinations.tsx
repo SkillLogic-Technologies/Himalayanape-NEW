@@ -9,31 +9,31 @@ import { useToast } from "@/components/ui/toast";
 
 const DESTINATIONS = [
   {
-    from: "Dhaka",
+    from: "Indore",
     to: "Thailand",
     date: "Fri, May 21 - Mon, Jun 10",
-    price: "$670.00",
+    price: "₹55,600",
     image: "/travel-images/918a169bbf090069562831cff42108b1.jpg",
   },
   {
-    from: "Dhaka",
+    from: "Indore",
     to: "Tokyo",
     date: "Fri, May 21 - Mon, Jun 10",
-    price: "$670.00",
+    price: "₹55,600",
     image: "/travel-images/b55e27b99cc7b9ac2a9880e6087c8dc7.jpg",
   },
   {
-    from: "Dhaka",
+    from: "Indore",
     to: "Chicago",
     date: "Fri, May 21 - Mon, Jun 10",
-    price: "$670.00",
+    price: "₹55,600",
     image: "/travel-images/b917fdc63744ad30426969f6d5402ce8.jpg",
   },
   {
-    from: "Dhaka",
+    from: "Indore",
     to: "Cox's bazar",
     date: "Fri, May 21 - Mon, Jun 10",
-    price: "$670.00",
+    price: "₹55,600",
     image: "/travel-images/bbd7a6fd1334471c8a774dcd5c4cf27b.jpg",
   },
 ];

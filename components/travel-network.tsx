@@ -8,43 +8,42 @@ export default function TravelNetwork() {
     <section className="mx-auto max-w-7xl px-6 py-24 md:px-10">
       <Reveal className="mx-auto mb-12 max-w-2xl text-center">
         <p className="text-sm font-medium text-accent-green">
-          Global Network
+          Pan-India Network
         </p>
         <h2 className="mt-2 font-display text-3xl font-bold md:text-4xl lg:text-5xl">
           Every Trip, Connected
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-text-muted md:text-base">
-          From Dhaka to the world&apos;s most sought-after coastlines and
-          skylines — Movade plans the route, you enjoy the journey.
+          From Indore to India&apos;s most sought-after hills, beaches and
+          backwaters — Himalayanape plans the route, you enjoy the journey.
         </p>
       </Reveal>
 
       <WorldMap
         lineColor="#B6FF3C"
+        countries={["IND"]}
+        region={{ lat: { min: 4, max: 39 }, lng: { min: 66, max: 99 } }}
+        aspectClassName="aspect-[4/5] sm:aspect-[1/1] md:aspect-[4/3] lg:aspect-[3/2]"
         dots={[
           {
-            start: { lat: 23.8103, lng: 90.4125, label: "Dhaka", labelDir: "w" },
-            end: { lat: 13.7563, lng: 100.5018, label: "Thailand", labelDir: "s" },
+            start: { lat: 22.7196, lng: 75.8577, label: "Indore", labelDir: "s" },
+            end: { lat: 34.0837, lng: 74.7973, label: "Kashmir", labelDir: "n" },
           },
           {
-            start: { lat: 23.8103, lng: 90.4125, label: "Dhaka", labelDir: "w" },
-            end: { lat: 35.6762, lng: 139.6503, label: "Tokyo", labelDir: "n" },
+            start: { lat: 22.7196, lng: 75.8577, label: "Indore", labelDir: "s" },
+            end: { lat: 32.2432, lng: 77.1892, label: "Manali", labelDir: "n" },
           },
           {
-            start: { lat: 23.8103, lng: 90.4125, label: "Dhaka", labelDir: "w" },
-            end: { lat: 41.8781, lng: -87.6298, label: "Chicago", labelDir: "n" },
+            start: { lat: 22.7196, lng: 75.8577, label: "Indore", labelDir: "s" },
+            end: { lat: 15.2993, lng: 74.1240, label: "Goa", labelDir: "s" },
           },
           {
-            start: { lat: 23.8103, lng: 90.4125, label: "Dhaka", labelDir: "w" },
-            end: { lat: 21.4272, lng: 92.0058, label: "Cox's Bazar", labelDir: "e" },
+            start: { lat: 22.7196, lng: 75.8577, label: "Indore", labelDir: "s" },
+            end: { lat: 9.9312, lng: 76.2673, label: "Kerala", labelDir: "s" },
           },
           {
-            start: { lat: 23.8103, lng: 90.4125, label: "Dhaka", labelDir: "w" },
-            end: { lat: 36.3932, lng: 25.4615, label: "Santorini", labelDir: "s" },
-          },
-          {
-            start: { lat: 23.8103, lng: 90.4125, label: "Dhaka", labelDir: "w" },
-            end: { lat: 42.6507, lng: 18.0944, label: "Dubrovnik", labelDir: "n" },
+            start: { lat: 22.7196, lng: 75.8577, label: "Indore", labelDir: "s" },
+            end: { lat: 11.7401, lng: 92.6586, label: "Andaman", labelDir: "e" },
           },
         ]}
       />

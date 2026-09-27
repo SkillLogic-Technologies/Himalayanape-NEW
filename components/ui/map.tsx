@@ -18,6 +18,9 @@ interface MapProps {
   animationDuration?: number;
   loop?: boolean;
   dark?: boolean;
+  countries?: string[];
+  region?: { lat: { min: number; max: number }; lng: { min: number; max: number } };
+  aspectClassName?: string;
 }
 
 function MapLabel({
@@ -51,14 +54,14 @@ function MapLabel({
     arrowPoints = `${x - 4},${y + gap} ${x + 4},${y + gap} ${x},${y + gap - 6}`;
     origin = `${x}px ${y + gap}px`;
   } else if (dir === "e") {
-    boxX = x + gap;
+    boxX = x + gap + 8;
     boxY = y - boxH / 2;
-    arrowPoints = `${x + gap},${y - 4} ${x + gap},${y + 4} ${x + gap - 6},${y}`;
+    arrowPoints = `${x + gap},${y - 4} ${x + gap},${y + 4} ${x + gap + 6},${y}`;
     origin = `${x + gap}px ${y}px`;
   } else if (dir === "w") {
-    boxX = x - gap - boxW;
+    boxX = x - gap - 8 - boxW;
     boxY = y - boxH / 2;
-    arrowPoints = `${x - gap},${y - 4} ${x - gap},${y + 4} ${x - gap + 6},${y}`;
+    arrowPoints = `${x - gap},${y - 4} ${x - gap},${y + 4} ${x - gap - 6},${y}`;
     origin = `${x - gap}px ${y}px`;
   }
 
@@ -92,11 +95,17 @@ export function WorldMap({
   animationDuration = 2,
   loop = true,
   dark = true,
+  countries,
+  region,
+  aspectClassName = "aspect-[2/1] md:aspect-[2.5/1] lg:aspect-[2/1]",
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoveredLocation, setHoveredLocation] = useState<string | null>(null);
 
-  const map = useMemo(() => new DottedMap({ height: 100, grid: "diagonal" }), []);
+  const map = useMemo(
+    () => new DottedMap({ height: 100, grid: "diagonal", countries, region }),
+    [countries, region]
+  );
 
   const svgMap = useMemo(
     () =>
@@ -109,9 +118,14 @@ export function WorldMap({
     [map, dark]
   );
 
+  const latMin = region?.lat.min ?? -90;
+  const latMax = region?.lat.max ?? 90;
+  const lngMin = region?.lng.min ?? -180;
+  const lngMax = region?.lng.max ?? 180;
+
   const projectPoint = (lat: number, lng: number) => {
-    const x = (lng + 180) * (800 / 360);
-    const y = (90 - lat) * (400 / 180);
+    const x = ((lng - lngMin) / (lngMax - lngMin)) * 800;
+    const y = ((latMax - lat) / (latMax - latMin)) * 400;
     return { x, y };
   };
 
@@ -119,19 +133,30 @@ export function WorldMap({
     start: { x: number; y: number },
     end: { x: number; y: number }
   ) => {
-    const midX = (start.x + end.x) / 2;
-    const midY = Math.min(start.y, end.y) - 50;
+    const dx = end.x - start.x;
+    const dy = end.y - start.y;
+    const dist = Math.hypot(dx, dy) || 1;
+    const bow = Math.min(50, Math.max(12, dist * 0.25));
+
+    // Perpendicular offset so near-vertical/near-horizontal lines still
+    // visibly separate instead of stacking on top of each other. Bow toward
+    // the side the destination actually sits on (left vs right of the
+    // start), so routes fan out radially instead of converging near the
+    // shared origin when several destinations lie in similar directions.
+    const nx = -dy / dist;
+    const ny = dx / dist;
+    const side = dx >= 0 ? 1 : -1;
+
+    const midX = (start.x + end.x) / 2 + nx * bow * side;
+    const midY = (start.y + end.y) / 2 + ny * bow * side;
     return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
   };
 
   const staggerDelay = 0.3;
-  const totalAnimationTime = dots.length * staggerDelay + animationDuration;
-  const pauseTime = 2;
-  const fullCycleDuration = totalAnimationTime + pauseTime;
 
   return (
     <div
-      className={`relative aspect-[2/1] w-full overflow-hidden rounded-3xl font-sans md:aspect-[2.5/1] lg:aspect-[2/1] ${
+      className={`relative w-full overflow-hidden rounded-3xl font-sans ${aspectClassName} ${
         dark ? "bg-bg-dark" : "bg-white"
       }`}
       onMouseLeave={() => setHoveredLocation(null)}
@@ -173,10 +198,8 @@ export function WorldMap({
           const startPoint = projectPoint(dot.start.lat, dot.start.lng);
           const endPoint = projectPoint(dot.end.lat, dot.end.lng);
           const path = createCurvedPath(startPoint, endPoint);
-
-          const startTime = (i * staggerDelay) / fullCycleDuration;
-          const endTime = (i * staggerDelay + animationDuration) / fullCycleDuration;
-          const resetTime = totalAnimationTime / fullCycleDuration;
+          const markerDelay = i * staggerDelay + animationDuration;
+          const markerLoopDuration = 2.5;
 
           return (
             <g key={`path-group-${i}`}>
@@ -186,24 +209,12 @@ export function WorldMap({
                 stroke="url(#path-gradient)"
                 strokeWidth="1"
                 initial={{ pathLength: 0 }}
-                animate={
-                  loop ? { pathLength: [0, 0, 1, 1, 0] } : { pathLength: 1 }
-                }
-                transition={
-                  loop
-                    ? {
-                        duration: fullCycleDuration,
-                        times: [0, startTime, endTime, resetTime, 1],
-                        ease: "easeInOut",
-                        repeat: Infinity,
-                        repeatDelay: 0,
-                      }
-                    : {
-                        duration: animationDuration,
-                        delay: i * staggerDelay,
-                        ease: "easeInOut",
-                      }
-                }
+                animate={{ pathLength: 1 }}
+                transition={{
+                  duration: animationDuration,
+                  delay: i * staggerDelay,
+                  ease: "easeInOut",
+                }}
               />
 
               {loop && (
@@ -213,21 +224,21 @@ export function WorldMap({
                   filter="url(#glow)"
                   initial={{ offsetDistance: "0%", opacity: 0 }}
                   animate={{
-                    offsetDistance: [
-                      null as unknown as string,
-                      "0%",
-                      "100%",
-                      "100%",
-                      "100%",
-                    ],
-                    opacity: [0, 0, 1, 0, 0],
+                    offsetDistance: ["0%", "100%"],
+                    opacity: [1, 1],
                   }}
                   transition={{
-                    duration: fullCycleDuration,
-                    times: [0, startTime, endTime, resetTime, 1],
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                    repeatDelay: 0,
+                    offsetDistance: {
+                      duration: markerLoopDuration,
+                      delay: markerDelay,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      repeatDelay: 0.4,
+                    },
+                    opacity: {
+                      duration: 0.01,
+                      delay: markerDelay,
+                    },
                   }}
                   style={{
                     offsetPath: `path('${path}')`,

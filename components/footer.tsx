@@ -121,21 +121,20 @@ export default function Footer() {
               className="flex items-center gap-2 focus:outline-none"
               aria-label="Go to top"
             >
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M21 12L3 4l3.5 8L3 20l18-8z"
-                  fill="#0B0F0D"
-                  stroke="#0B0F0D"
-                  strokeWidth="1"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="font-display text-xl font-bold">Movade</span>
+              <Image src="/logo.png" alt="Himalayanape" width={48} height={48} className="h-11 w-11 object-contain" />
+              <span className="font-display text-xl font-bold">Himalayanape</span>
             </button>
             <p className="mt-4 max-w-xs text-sm font-bold leading-relaxed text-text-primary">
               Explore the world, one journey at a time — personalized,
               hassle-free travel experiences tailored to you.
             </p>
+            <p className="mt-4 text-sm font-bold text-text-primary">Indore, Madhya Pradesh, India</p>
+            <a
+              href="tel:+918318943040"
+              className="mt-1 block text-sm font-bold text-text-primary transition-opacity hover:opacity-70"
+            >
+              +91 83189 43040
+            </a>
           </div>
 
           {/* Link columns */}
@@ -193,8 +192,19 @@ export default function Footer() {
         </div>
 
         <div className="mt-auto flex flex-col items-center justify-between gap-4 pt-6 md:flex-row md:pt-8">
-          <p className="text-xs font-bold text-text-primary">
-            © 2026 Movade. All rights reserved.
+          <p className="rounded-full bg-black/85 px-3 py-1.5 text-xs font-extrabold text-accent-green shadow-sm backdrop-blur-sm">
+            © 2026 Himalayanape. All rights reserved.
+            <span className="hidden sm:inline">{" · "}</span>
+            <br className="sm:hidden" />
+            Developed by{" "}
+            <a
+              href="https://www.skilllogic.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:opacity-70"
+            >
+              Skilllogic Technologies
+            </a>
           </p>
           <div className="flex items-center gap-3">
             {SOCIALS.map((social) => (

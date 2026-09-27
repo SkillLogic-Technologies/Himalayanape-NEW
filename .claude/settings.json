@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node _gen_india_map.js)",
+      "Bash(node _render_india_map.js)",
+      "Bash(node _check_region.js)",
+      "Bash(rm _check_region.js)",
+      "Bash(node _verify_screenshot2.js)",
+      "Bash(node -e ' *)",
+      "Bash(node _verify_screenshot3.js)",
+      "Bash(node _inspect.js)",
+      "Bash(powershell -NoProfile -Command \"\\(netstat -ano | Select-String ':3000' | Select-String 'LISTENING'\\) -match '\\\\s+\\(\\\\d+\\)$' | Out-Null; netstat -ano | Select-String ':3000.*LISTENING'\")",
+      "Bash(powershell -NoProfile -Command \"Stop-Process -Id 11520 -Force -ErrorAction SilentlyContinue\")",
+      "Bash(curl -sI http://localhost:3000/icon.png)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(cp -r .next/standalone/* deploy/)",
+      "Bash(cp -r .next/standalone/.[!.]* deploy/)",
+      "Bash(cp -r .next/static/* deploy/.next/static/)",
+      "Bash(cp -r public deploy/public)",
+      "Bash(powershell -NoProfile -Command \"Compress-Archive -Path 'deploy\\\\*' -DestinationPath 'himalayanape-deploy.zip' -Force\")",
+      "Bash(curl -sf http://localhost:4173)",
+      "Bash(node _verify_static.js)",
+      "Bash(powershell -NoProfile -Command \"Compress-Archive -Path 'out\\\\*' -DestinationPath 'himalayanape-static-dist.zip' -Force\")",
+      "Bash(powershell -NoProfile -Command \"Get-Process node -ErrorAction SilentlyContinue | Select-Object Id,Path\")",
+      "Bash(powershell -NoProfile -Command 'Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue | Where-Object {$_.OwningProcess -in @\\(5512,8236,11364,18580,23392\\)} | Select-Object LocalPort,OwningProcess')",
+      "Bash(powershell -NoProfile -Command \"Stop-Process -Id 11364 -Force -ErrorAction SilentlyContinue\")"
+    ]
+  }
+}

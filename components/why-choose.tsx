@@ -159,14 +159,14 @@ export default function WhyChoose() {
         <Reveal>
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-text-primary shadow-sm backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-green" />
-            Why Movade
+            Why Himalayanape
           </div>
 
           <h2 className="font-display text-3xl font-bold leading-[1.05] tracking-tight text-balance md:text-4xl lg:text-[3rem]">
             Why Thousands of Travelers Choose{" "}
             <span className="relative inline-block whitespace-nowrap">
               <span className="relative z-10 bg-gradient-to-r from-accent-green to-[#7FE000] bg-clip-text text-transparent">
-                Movade
+                Himalayanape
               </span>
               <svg
                 aria-hidden

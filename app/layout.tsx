@@ -3,7 +3,6 @@ import { Syne, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/lib/lenis-provider";
 import { ToastProvider } from "@/components/ui/toast";
-import Preloader from "@/components/preloader";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -18,9 +17,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Movade — Explore the World, One Journey at a Time",
+  title: "Himalayanape — Explore the World, One Journey at a Time",
   description:
-    "Our travel agency offers personalized and hassle-free travel experiences, tailored to meet your unique preferences and needs.",
+    "Himalayanape is an Indore-based travel agency offering personalized and hassle-free travel experiences, tailored to meet your unique preferences and needs.",
 };
 
 export default function RootLayout({
@@ -34,9 +33,7 @@ export default function RootLayout({
         className={`${syne.variable} ${spaceGrotesk.variable} font-body antialiased bg-bg-primary text-text-primary`}
       >
         <ToastProvider>
-          <Preloader>
-            <SmoothScrollProvider>{children}</SmoothScrollProvider>
-          </Preloader>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </ToastProvider>
       </body>
     </html>

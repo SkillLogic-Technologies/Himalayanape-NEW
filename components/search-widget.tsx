@@ -10,6 +10,28 @@ import clsx from "clsx";
 
 const RESIDENCE_TABS = ["All Residences", "Hotel", "Apartment", "Villa"];
 const FILTER_CHIPS = ["House", "Hotel", "Residential", "Apartment"];
+const INDIA_LOCATIONS = [
+  "Goa",
+  "Kerala",
+  "Kashmir",
+  "Manali",
+  "Shimla",
+  "Rajasthan",
+  "Jaipur",
+  "Udaipur",
+  "Rishikesh",
+  "Dehradun",
+  "Ladakh",
+  "Andaman & Nicobar",
+  "Munnar",
+  "Ooty",
+  "Darjeeling",
+  "Mumbai",
+  "Delhi",
+  "Agra",
+  "Varanasi",
+  "Indore",
+];
 
 export default function SearchWidget({
   progressRef,
@@ -143,6 +165,7 @@ export default function SearchWidget({
             placeholder="Type the destination"
             value={location}
             onChange={setLocation}
+            listId="india-locations"
           />
           <Field
             label="Check In"
@@ -197,6 +220,12 @@ export default function SearchWidget({
           </MagneticButton>
         </div>
       </motion.div>
+
+      <datalist id="india-locations">
+        {INDIA_LOCATIONS.map((place) => (
+          <option key={place} value={place} />
+        ))}
+      </datalist>
     </div>
   );
 }
@@ -207,12 +236,14 @@ function Field({
   type = "text",
   value,
   onChange,
+  listId,
 }: {
   label: string;
   placeholder: string;
   type?: string;
   value: string;
   onChange: (v: string) => void;
+  listId?: string;
 }) {
   return (
     <div className="flex flex-col gap-1.5">
@@ -222,6 +253,7 @@ function Field({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        list={listId}
         className="rounded-xl border border-border-subtle bg-white/70 px-3 py-2.5 text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-text-primary"
       />
     </div>

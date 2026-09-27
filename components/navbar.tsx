@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap-config";
 import MagneticButton from "@/components/ui/magnetic-button";
 import { useToast } from "@/components/ui/toast";
@@ -111,19 +112,11 @@ export default function Navbar() {
         className="flex items-center gap-2 focus:outline-none"
         aria-label="Go to top"
       >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M21 12L3 4l3.5 8L3 20l18-8z"
-            fill={iconColor}
-            stroke={iconColor}
-            strokeWidth="1"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <Image src="/logo.png" alt="Himalayanape" width={80} height={80} className="h-16 w-16 object-contain md:h-20 md:w-20" priority />
         <span
-          className={`font-display text-xl font-bold tracking-tight transition-colors duration-300 ${textColor}`}
+          className={`font-display text-2xl font-bold tracking-tight transition-colors duration-300 md:text-3xl ${textColor}`}
         >
-          Movade
+          Himalayanape
         </span>
       </button>
 

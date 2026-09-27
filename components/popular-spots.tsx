@@ -18,7 +18,7 @@ const SPOTS = [
     reviews: "3.5k",
     location: "Greece, Mediterranean Sea",
     duration: "3 Days",
-    price: "$1,000",
+    price: "₹83,000",
     showPrice: true,
     span: "md:col-span-2 md:row-span-2" as const,
     emoji: "🌄",
